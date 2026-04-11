@@ -17,11 +17,11 @@ export type CreateCustomerDto = {
 export type UpdateCustomerDto = Partial<CreateCustomerDto>; 
  
 export const customersApi = { 
-    list: () => http<Customer[]>("/customers"), 
+    list: () => http<Customer[]>("/api/customers"), 
     create: (dto: CreateCustomerDto) => 
-        http<Customer>("/customers", { method: "POST", body: JSON.stringify(dto) }), 
+        http<Customer>("/api/customers", { method: "POST", body: JSON.stringify(dto) }), 
     update: (id: number, dto: UpdateCustomerDto) => 
-        http<Customer>(`/customers/${id}`, { method: "PATCH", body: JSON.stringify(dto) 
+        http<Customer>(`/api/customers/${id}`, { method: "PATCH", body: JSON.stringify(dto) 
 }), 
-    remove: (id: number) => http<void>(`/customers/${id}`, { method: "DELETE" }), 
+    remove: (id: number) => http<void>(`/api/customers/${id}`, { method: "DELETE" }), 
 };
