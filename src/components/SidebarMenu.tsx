@@ -1,7 +1,7 @@
 type Props = { 
     current: string; 
     onChange: (page: string) => void; 
-    menuOptions: { name: string; content: string }[];
+    menuOptions: { name: string; content: string; icon?: string }[];
 }; 
  
 export default function SidebarMenu({ current, onChange, menuOptions }: Props) { 
@@ -12,11 +12,12 @@ export default function SidebarMenu({ current, onChange, menuOptions }: Props) {
                 {menuOptions.map((mo) => (
                     <button 
                         key={mo.name}
-                        className={`text-left p-2 rounded ${current === mo.name 
+                        className={`text-left p-2 rounded flex items-center gap-2 ${current === mo.name 
                                 ? "bg-black text-white" : "hover:bg-gray-100"}`} 
                         onClick={() => onChange(mo.name)} 
                     >
-                        {mo.content}
+                        {mo.icon && <span>{mo.icon}</span>}
+                        <span>{mo.content}</span>
                     </button>
                 ))}
             </nav> 

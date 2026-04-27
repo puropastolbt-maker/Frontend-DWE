@@ -1,8 +1,18 @@
 export const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000"; 
  
-export async function http<T>(path: string, options?: RequestInit): Promise<T> { 
+export async function http<T>(path: string, options?: RequestInit): Promise<T> {
+    const token = localStorage.getItem("token");
+    const headers: HeadersInit = {
+        "Content-Type": "application/json",
+        ...(options?.headers ?? {}),
+    };
+
+    if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+    }
+
     const res = await fetch(`${API_URL}${path}`, { 
-        headers: { "Content-Type": "application/json", ...(options?.headers ?? {}) }, 
+        headers,
         ...options, 
     }); 
  
